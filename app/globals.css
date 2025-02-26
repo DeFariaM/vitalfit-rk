@@ -5,6 +5,10 @@
 :root {
   --background: #f2fcfb;
   --foreground: #010404;
+  --brand: #d74545;
+  --secondary: #d6774f;
+  --accent: #2fd6bd;
+  --bgray: #475157;
 }
 
 body {
@@ -17,4 +21,68 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.entryarea {
+  position: relative;
+  line-height: 30px;
+  height: 30px;
+}
+
+.input-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 20px;
+}
+
+input {
+  position: relative;
+  min-width: 300px;
+  width: 100%;
+  outline: none;
+  padding: 0.6rem;
+  line-height: 30px;
+  border-radius: 12px;
+  border: 1px solid var(--bgray);
+  background-color: transparent;
+  transition: 0.1s ease;
+  z-index: 1111;
+}
+
+.labelline {
+  position: absolute;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0 25px;
+  color: var(--bgray);
+  background-color: transparent;
+  transition: 0.2s ease;
+  top: 12px;
+}
+
+input:focus {
+  border: 2px solid var(--brand);
+}
+input:valid {
+  border: 2px solid var(--accent);
+}
+
+input:focus + .labelline,
+input:valid + .labelline {
+  background: var(--brand);
+  border-radius: 12px;
+  margin: 0 20px;
+  color: #fff;
+  font-weight: 200;
+  height: 30px;
+  line-height: 30px;
+  transform: translate(-12px, -26px) scale(0.9);
+  z-index: 1111;
+}
+
+input:valid + .labelline {
+  background-color: var(--accent) !important;
+  color: #171717;
 }

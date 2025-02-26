@@ -12,7 +12,7 @@ const config = {
         foreground: "var(--foreground)",
         primary: "#d74545",
         secondary: "#d6774f",
-        accent: "#475157",
+        accent: "#2fd6bd",
         bgray: "#475157",
       },
       fontFamily: {
