@@ -33,12 +33,15 @@ export const signup = async ({ email, password, name }) => {
       photoURL,
       displayName: name,
     });
+    console.log(user);
     return {
       ok: true,
       email,
       name,
     };
   } catch (error) {
+    console.log(error);
+
     const message = error.message;
     return {
       ok: false,
@@ -52,6 +55,8 @@ export const login = async ({ email, password }) => {
   try {
     const { user } = await signInWithEmailAndPassword(auth, email, password);
     const { uid, photoURL, displayName } = user;
+    console.log(user);
+
     return {
       ok: true,
       uid,
@@ -59,7 +64,19 @@ export const login = async ({ email, password }) => {
       displayName,
     };
   } catch (error) {
-    const message = error.message;
+    console.error(error);
+    const errorMessages = {
+      "auth/user-not-found": "Usuario no encontrado.",
+      "auth/wrong-password": "Contraseña incorrecta.",
+      "auth/invalid-email": "Correo electrónico inválido.",
+      "auth/user-disabled": "Usuario deshabilitado.",
+      "auth/invalid-credential": "Usuario no registrado.",
+    };
+
+    const message = errorMessages[error.code] || error.message;
+
+    console.log(message);
+
     return {
       ok: false,
       message,
@@ -71,7 +88,7 @@ export const login = async ({ email, password }) => {
 export const signInWithGoogle = async () => {
   try {
     const { user } = await signInWithPopup(auth, googleProvider);
-    const { uid, photoURL, displayName } = user;
+    const { uid, photoURL, displayName, email } = user;
     const docref = doc(db, "users", uid);
     await setDoc(docref, {
       status: "active",
@@ -87,6 +104,7 @@ export const signInWithGoogle = async () => {
       displayName,
     };
   } catch (error) {
+    console.log(error);
     const message = error.message;
     return {
       ok: false,
