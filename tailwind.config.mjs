@@ -20,8 +20,8 @@ const config = {
         montserrat: "var(--montserrat)",
       },
       backgroundImage: {
-        pattern: "url('.../public/subtle-prism.svg')",
-        tornado: "url('../public/diamond-sunset.svg')",
+        pattern: "url('@/public/subtle-prism.svg')",
+        tornado: "url('@/public/diamond-sunset.svg')",
       },
     },
   },
